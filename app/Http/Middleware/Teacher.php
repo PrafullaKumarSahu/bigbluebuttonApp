@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class Teacher
 {
@@ -17,11 +18,9 @@ class Teacher
     {
         if (Auth::check() && Auth::user()->role == 'teacher') {
             return $next($request);
-        }
-        elseif (Auth::check() && Auth::user()->role == 'student') {
+        } elseif (Auth::check() && Auth::user()->role == 'student') {
             return redirect('/student');
-        }
-        else {
+        } else {
             return redirect('/admin');
         }
     }
